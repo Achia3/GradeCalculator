@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Calculator</title>
+
+    <style>
+        #box1 {
+            border: solid 1px;
+            width: 700px;
+            height: 700px;
+            background-color: hsl(0, 0%, 92%);
+            box-shadow: 3px 3px 5px;
+            position: absolute;
+            margin-left: 25%;
+            margin-right: 50%;
+        }
+
+        #input1 {
+            position: absolute;
+            margin-left: 12rem;
+            top: 19rem;
+            width: 300px;
+            height: 30px;
+        }
+
+        #h3 {
+            position: absolute;
+            margin-left: 15rem;
+            margin-top: 16rem;
+        }
+
+        #button1 {
+            position: absolute;
+            margin-left: 18.5rem;
+            margin-top: 21rem;
+            border-radius: 10px;
+            cursor: pointer;
+            height: 50px;
+            width: 100px;
+        }
+
+        h1 {
+            margin-left: 14rem;
+            display: flex;
+            position: absolute;
+            margin-top: 5rem;
+        }
+
+        #box2 {
+            background-color: white;
+            border: solid 1px;
+            border-radius: 20px;
+            height: 200px;
+            width: 500px;
+            position: absolute;
+            margin-top: 25rem;
+            left: 90px;
+            padding: 20px;
+        }
+
+        #button1:hover {
+            background-color: green;
+        }
+    </style>
+
+  
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+    <script defer src="https://pyscript.net/latest/pyscript.js"></script>
+</head>
+
+<body>
+<div id="box1">
+    <h1>Grade Calculator</h1>
+
+
+    <input type="number" id="input1" max="100" min="0" required> <br>
+    <h3 id="h3">Please Input Prelim Grade:</h3>
+
+   
+    <button id="button1" py-click="calculate()">Calculate</button>
+
+    <div id="box2">
+        <h3>Results:</h3>
+        <p id="result"></p>
+        <p id="eligibility"></p>
+    </div>
+</div>
+
+<py-script>
+from pyscript import Element
+
+def calculate():
+    prelim_grade = 0.2
+    midterm_grade = 0.3
+    final_grade = 0.5
+    subject_grade = 75
+
+    
+    grade = float(Element("input1").element.value)
+
+    
+    compute1 = grade * prelim_grade
+    compute2 = midterm_grade + final_grade
+    compute3 = subject_grade - compute1
+    compute4 = compute3 / compute2
+
+    
+    if grade <= 50:
+        eligibility_message = "You are not eligible for Dean's Lister"
+    else:
+        eligibility_message = "You are eligible to become a Dean's Lister"
+
+    
+    result_message = f'You need a grade of {compute4:.2f} for both the midterm and finals to pass the subject'
+
+    Element("result").element.innerHTML = result_message
+    Element("eligibility").element.innerHTML = eligibility_message
+
+</py-script>
+
+</body>
+</html>
